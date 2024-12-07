@@ -1,221 +1,472 @@
-**Overview**: Quick documentation (with UI) is a Python application that automates the process of generating documentation for projects by leveraging AI-powered language models. It offers a user-friendly graphical interface to input project information, select languages, and choose AI models for optimal results.
+# Quick Documentation Generator Overview
 
-**Features**:
-- Supports multiple programming languages and AI models
-- Easily integrates with Git for version control
-- Quick generation of project documentation
-- Customizable prompts for tailored documentation
-- Provides a graphical user interface for easy input and monitoring
+Quick documentation is an interactive tool for generating project documentation. It allows users to easily create documentation by providing a user-friendly interface and integrating with various programming languages and APIs. This tool aims to simplify the process of creating comprehensive documentation for your projects, saving time and effort.
 
-**Structure**:
-- The project consists of two main Python modules: the backend (main) and the frontend (GUI).
-- The backend_module logic resides in the `backend.py` file, handling the crucial tasks of the application. It includes classes such as `AutoDock` and `DataHandler`.
-- The frontend_module contains the user interface, mainly defined in the `GUI` folder, including HTML (`index.html`), CSS (`style.css`), and JavaScript (`script.js`) files to interact with users.
+## Features
 
-**Usage**:
-1. To run the application, execute the backend script, e.g., `python backend.py`.
-2. Open the provided HTML file in a web browser (e.g., through the file:/// URL).
-3. Fill in the required input fields, such as project name, path, and ignore files.
-4. Specify additional preferences such as languages, prompts, and AI model versions.
-5. Click the "Gen doc" button to initiate the documentation generation process.
+- User-friendly graphical user interface.
+- Support for different programming languages and programming environments.
+- Advanced and accurate syntax highlighting.
+- Customizable prompts for a tailored documentation experience.
 
-The application will use the specified AI model to generate project documentation and save the output in a suitable format (e.g., markdown files, README.md).
+## Structure
 
-Note: Please ensure that the AI model and any necessary dependencies are installed and properly configured in the project before running the application.
-# backend.py Documentation
+The codebase is organized in different directories and files for easy navigation and maintenance. Here's an overview of the main components:
+
+- `pyproject.toml`: Project configuration file, defining dependencies, scripts, and other project-related settings.
+- `backend.py`: Main backend file that handles communication with APIs and logic for generating documentation.
+- `DataHandler.py`: A class responsible for managing languages, versions, and other data-related operations.
+- `AutoDock.py`: A class for handling user input and generating documentation based on the provided project-specific data.
+- `GUI/index.html`: The main HTML file for the graphical user interface.
+- `GUI/script.js`: Contains JavaScript code to manage user inputs and interactions with the frontend.
+- `GUI/style.css`: Defines the style for the user interface.
+- `visual.py`: A script that creates and initializes the GUI and handles the communication between frontend and backend.
 
 ## Usage
 
-To use the `backend.py` file, you first need to create an instance of the `AutoDock` class by providing the necessary parameters. Then, call the `gen_doc()` method on the instance to generate the documentation for your project.
+To use the Quick documentation generator, follow these steps:
 
-```python
-from quick_doc_py.main import worker
-from quick_doc_py.config import LANGUAGE_TYPE, GPT_MODELS
-from quick_doc_py.providers_test import provider_test
+1. Install the required dependencies by running `pip install -r requirements.txt`.
+2. Launch the application by running `python visual.py` in your terminal or command prompt.
+3. The tool will open a graphical user interface in the web browser.
+4. Enter the required information (project name, project path, ignored files, and prompts) in the appropriate fields.
+5. Choose the desired programming languages and GPT version from the respective dropdowns.
+6. Click the "Gen doc" button to generate the documentation.
 
-from backend import AutoDock
+The generated documentation will be saved in the specified project directory, depending on your project requirements and settings.
+# Quick-doc-py UI Documentation
 
-# Set root directory, name of project, ignore patterns, and languages
-root_dir = "C:/Users/sinic/Python_Project/Quick-doc-py UI/"
-name = "Test Project UI"
-ignore = [".venv"]
-languages = ["en"]
+## Usage
 
-# Get active providers for a specific GPT version
-gpt_version = "gpt-3.5-turbo"
-providers = DataHandler().get_active_providers(gpt_version)
+To use Quick-doc-py UI, please follow the steps below:
 
-# Get a list of supported languages
-supported_languages = DataHandler().support_languages()
+1. Install the required dependencies by running the command:
 
-# Get a list of supported GPT versions
-supported_versions = DataHandler().support_versions()
-
-# Create an instance of the AutoDock class with the required parameters
-ad = AutoDock(name_project=name, root_dir=root_dir, ignore=ignore, languages=languages)
-
-# Generate the documentation using the gen_doc() method
-ad.gen_doc()
+```
+pip install -r requirements.txt
 ```
 
-## Methods
+2. Open your terminal or command prompt and navigate to the root directory of your Python project.
 
-### AutoDock class
+3. Run the following command to generate the documentation:
 
-The `AutoDock` class is used to generate the documentation for a given project. Here are its methods:
+```
+python -m quick_doc_ui.visual
+```
 
-- `__init__(...):` This is the constructor method for the `AutoDock` class. It initializes the object with the given project name, ignore patterns, root directory, languages, and additional options such as GPT version, provider, general prompt, and default prompt.
+```
+gen-doc-ui
+```
 
-- `gen_doc():` This method is used to generate the documentation for the project. It parses the given arguments using `argparse`, and then calls the `worker` function from the `main` module in the `quick-doc-py` package to generate the documentation using the selected GPT version, provider, and prompts.
-
-### DataHandler class
-
-The `DataHandler` class provides helper methods for getting available providers, supported languages, and GPT versions. Here are its methods:
-
-- `get_active_providers(gpt_version: str):` This method returns a list of available providers for the given GPT version.
-
-- `support_languages():` This method returns a list of supported languages.
-
-- `support_versions():` This method returns a list of supported GPT versions.
-
-By using these methods, you can create documentation for your projects efficiently and with ease.
-# QuickDocPy UI Documentation
-
-This document aims to describe the usage and methods of the `index.html` file for the QuickDocPy UI.
-
-## Usage
-
-The `index.html` file serves as the main user interface for the QuickDocPy application. It allows the user to input the necessary details for generating documentation.
-
-### Input Sections
-
-- **Name of project**: A text field where the user can input the name of their Python project. This information is later used to generate documentation content.
-- **Project path**: A text field where the user can input the project's path. This is required for QuickDocPy to access the project's files and folders.
-- **Ignore file**: A text field where the user can input the name of a file (or multiple files separated by commas) that should be ignored during documentation generation.
-- **General prompt**: A text field where the user can enter a specific prompt that will be used for the documentation generation process.
-- **Default prompt**: A text field where the user can enter a default prompt to be used if no specific general prompt is provided.
-
-### Language Selection
-
-- A dynamic section to display the list of available languages for documentation generation. Upon selecting a language, a tick mark appears to indicate that it has been chosen for the project.
-
-### GPT Version Selection
-
-- A dropdown menu where users can select a specific version of the GPT (Generative Pretraining Technology) to be used during documentation generation.
-
-### Generate Documentation Button
-
-- A button labeled "Gen doc" that is enabled once all required fields have been filled out by the user. When clicked, an asynchronous JavaScript function `gen_doc()` is called, initiating the documentation generation process.
+4. Follow the on-screen prompts to generate your documentation.
 
 ## Methods
 
-- `gen_doc()`: A function that, when triggered by the "Gen doc" button, initiates the documentation generation process with the provided inputs and user-selected settings in the user interface.
+This section describes the methods available within the Quick-doc-py UI.
 
-This documentation provides a brief overview of the `index.html` file's usage and methods, enabling further understanding of the interactive capabilities of the QuickDocPy UI application.
-# script.js
+### `gen-doc-ui`
 
-This file contains a JavaScript code for a GUI application. It includes methods and functions for getting information, displaying languages and versions, and generating documentation. The code is structured using Google's JavaScript Style Guide best practices.
+This command generates the documentation for your Python project. It is defined in `pyproject.toml`.
 
-## Usage
+**Command:** `gen-doc-ui`
 
-This file is intended to interact with Python scripts for generating documentation and displaying information through the `eel` library.
+**Description:** Generates documentation for your Python project.
 
-### Methods
+## Quick-doc-ui Backend Module Documentation
 
-1. `window.onload = function ()`
+This module provides the functionality to generate documentation for a given project using Quick-doc-py. The main classes provided by this module are `AutoDock` and `DataHandler`.
 
-   - This function is executed when the HTML page finishes loading.
-   - It sets the window size to 500 width and 800 height.
-   - Calls the `getInfo()` function to retrieve information about languages and versions.
-   - Logs the languages and versions to the console.
+### AutoDock Class
 
-2. `async function getInfo()`
+The `AutoDock` class is responsible for setting up the required parameters for the Quick-doc-py and generating the documentation.
 
-   - An async function that retrieves the documentation information by calling the `eel.get_info()` function asynchronously.
-   - Logs the retrieved data to the console.
-   - Displays languages and versions from the output.
-   - Calls the `add_languages()` function to populate a UI element with the available languages.
-   - Calls the `add_gpt()` function to populate a UI element with the available GPT versions.
-
-3. `function add_languages(langs)`
-
-   - Takes a list of languages as input and populates a UI element with checkboxes.
-   - Creates a new `<div>` element with the class name "language" for each language.
-   - Adds the language name and checkbox to the "language" element.
-   - Displays these elements inside a parent element with the class name "left" and the class "input".
-   - Enables users to select their desired languages.
-
-4. `function add_gpt(gpt_vesions)`
-
-   - Takes a list of GPT versions as input and populates a UI element with dropdown options.
-   - Creates a new `<option>` element for each GPT version and sets its value and text.
-   - Adds these `<option>` elements inside a parent element with the class name "right" and the class "input".
-   - Enables users to choose a GPT version from the dropdown.
-
-5. `function gen_doc()`
-
-   - Gathers input values from the user, which include project name, path, ignore items, g-prompt, d-prompt, and selected GPT version.
-   - Obtains selected languages from the UI element populated by the `add_languages()` function.
-   - Calls the `eel.gen_doc()` function with the input values and languages.
-
-6. `function get_lang()`
-
-   - Retrieves the checkbox inputs on UI elements with class names "tick", "language", and "left" inside the "input" element.
-   - Filters checked inputs (languages) and returns them in an array.
-
-*Note: This file assumes the existence of an `eel` library for Python-to-JavaScript interactions and relevant HTML elements for rendering the GUI.*
-# visual.py
-
-This file is part of the Quick-doc-py UI project that uses Electron [Electron](https://www.electronjs.org/) to render a web-based GUI to quickly generate project documentation using Google's AutoML APIs.
-
-The `visual.py` file contains methods exposed to the GUI for interacting with the backend (specifically `backend.DataHandler` and `backend.AutoDock` classes) for fetching language and version data, as well as generating project documentation.
-
-## Usage
-
-1. **Preparation**: Install dependencies and initialize the Electron environment.
-2. **Launch the App**: Run the `visual.py` file and open the app in a browser by navigating to the specified address (e.g. `http://127.0.0.1:809/`). 
-
-## Methods
-
-### `get_info()`
-_Gets supported languages and versions for documentation generation._
-
-#### Arguments
-No arguments.
-
-#### Return
-A dictionary named `data` with two keys: `"languages"` (a list of supported languages) and `"versions"` (a list of supported versions).
-
-### `gen_doc(name: str, root_dir: str, ignore: list[str], languages: list[str], g_prompt: str, d_prompt: str, version: str)`
-_Generates project documentation using the provided project information and AutoML parameters._
-
-#### Arguments
-- `name` (str): Name of the project to generate documentation for.
-- `root_dir` (str): Root directory of the project.
-- `ignore` (list[str]): List of file paths or patterns to ignore when scanning project files.
-- `languages` (list[str]): List of supported languages for documentation.
-- `g_prompt` (str): Prompt for general information (used by AutoML).
-- `d_prompt` (str): Prompt for documentation generation (used by AutoML).
-- `version` (str): Version of the Google's AI model to use.
-
-#### Returns
-No return value.
-
-### Example
+#### Constructor
 ```python
-from visual import get_info, gen_doc
+def __init__(self, 
+            name_project: str,
+            ignore: list[str],
+            root_dir: str,
+            languages: list[str],
+            with_git: bool = True,
+            gpt_version: str = "gpt-3.5-turbo",
+            provider: str = "DarkAI",
+            general_prompt: str = "",
+            default_prompt: str = ""
+            ):
+```
+- `name_project`: Name of the project for which the documentation needs to be generated.
 
-# Fetch available languages and versions
-doc_data = get_info()
+- `ignore`: List of files/folders to ignore while scanning for source code.
 
-# Generate documentation with specified project details
-gen_doc(
-    name="TestProject",
-    root_dir="/path/to/project",
-    ignore=["README.md", "*.txt"],
-    languages=doc_data["languages"],
-    g_prompt="General prompt for project details",
-    d_prompt="Documentation generation prompt",
-    version="recent"
+- `root_dir`: path to the root directory of the project.
+
+- `languages`: List of languages to be included for generating documentation.
+
+- `with_git` (optional): This parameter is set to `True` if git information is to be used. Default value is `True`.
+
+- `gpt_version` (optional): GPT version for generating documentation. Default value is "gpt-3.5-turbo".
+
+- `provider` (optional): Provider name for generating documentation. Default value is "DarkAI".
+
+- `general_prompt` (optional): General prompt for generating documentation.
+
+- `default_prompt` (optional): Default prompt for generating documentation.
+
+#### Methods
+```python
+def gen_doc(self):
+```
+- This method sets up the required arguments and calls Quick-doc-py to generate documentation for the given project.
+
+### DataHandler Class
+
+The `DataHandler` class provides information about supported languages and versions.
+
+#### Methods
+```python
+def get_active_providers(self, gpt_version: str):
+def support_languages(self):
+def support_versions(self):
+```
+- `get_active_providers`: Returns the active providers for the given GPT version.
+
+- `support_languages`: Returns the list of supported languages.
+
+- `support_versions`: Returns the list of supported GPT versions.
+
+#### Example Usage
+```python
+data_handler = DataHandler()
+active_providers = data_handler.get_active_providers("gpt-3.5-turbo")
+supported_languages = data_handler.support_languages()
+supported_versions = data_handler.support_versions()
+```
+- This code initializes the DataHandler class and retrieves the list of active providers, supported languages, and supported versions.
+
+#### AutoDock Usage Example
+```python
+from quick_doc_ui.backend import AutoDock
+
+auto_dock = AutoDock(
+    name_project="Test Project UI", 
+    ignore=[".venv"], 
+    root_dir="C:/Users/sinic/Python_Project/Quick-doc-py UI/",
+    languages=["en"]
 )
+
+auto_dock.gen_doc()
 ```
+- This code initializes the AutoDock class with provided parameters and generates documentation for the given project.
+
+Please note that this documentation is a supplementary addition to the existing document.
+# QuickDocPy GUI
+
+This guide describes the usage and methods of the QuickDocPy GUI application.
+
+## Usage
+
+To use the QuickDocPy GUI, follow these steps:
+
+1. Open the `index.html` file in a web browser.
+
+2. Input the project details:
+
+    - **Name of project**: Specify the name of your project.
+    - **Project path**: Enter the directory path for your project.
+    - **Ignore file**: If you want to specify an ignore file for your project, do so here.
+    - **General prompt**: Write a general prompt to describe your project's documentation.
+    - **Default prompt**: Write a default prompt for any parts of the documentation you would like to automatically generate.
+
+3. Select the programming language for your project from the dropdown menu.
+
+4. Choose the GPT version from the dropdown menu within the "Chose GPT version" section.
+
+5. Click the "Gen doc" button to generate the documentation for your project.
+
+This will create an HTML document containing the generated documentation for your specified project, populated with the content provided by the GPT model.
+
+## Method Descriptions
+
+1. `gen_doc()`:
+    - This function is called when the "Gen doc" button is clicked. It generates the project documentation using the provided prompts and GPT model.
+
+Please note that this documentation is an addition to the existing documentation and may not cover all aspects or configurations of the application.
+# Quick-doc UI Script Documentation
+
+This documentation provides an overview of the script's usage, explaining the different methods and their respective functionalities.
+
+## Table of Contents
+
+- [Window.onload](#windowonload)
+- [getInfo](#getinfo)
+- [add\_languages](#add\_languages)
+- [add\_gpt](#add\_gpt)
+- [gen\_doc](#gendoc)
+- [get\_lang](#getlang)
+
+<a name="windowonload"></a>
+
+## Window.onload
+
+This function initializes the window dimensions and calls the `getInfo` method to retrieve and display info from another extension.
+
+```javascript
+window.onload = function () {
+    window.resizeTo(500, 800);
+    info = getInfo();
+    console.log(info.languages);
+}
+```
+
+<a name="getinfo"></a>
+
+## getInfo
+
+The `getInfo` function communicates with an external extension, retrieves information using the `eel.get_info()` method, and parses the obtained information into separate components for further processing. It handles errors that may occur during the data retrieval.
+
+```javascript
+async function getInfo() {
+    try {
+        const info = await eel.get_info()(); 
+        console.log(info); 
+        console.log("Languages:", info.languages);
+        console.log("Versions:", info.versions);
+
+        add_languages(info.languages)
+        add_gpt(info.versions)
+    } catch (error) {
+        console.error("Error:", error); 
+    }
+}
+```
+
+<a name="add_languages"></a>
+
+## add\_languages
+
+The `add_languages` function populates a scrolling list on the GUI. It creates individual language elements and assigns each one a checkbox. These elements are added onto the designated parent DOM node.
+
+```javascript
+function add_languages(langs){
+    parent = document.querySelector(".input .current .left")
+    for (i in langs){
+        language = document.createElement("div")
+        language.classList.add("language");
+
+        name_class = document.createElement("div");
+        name_class.classList.add("name");
+
+        p_text = document.createElement("p");
+        p_text.innerHTML = langs[i]
+
+        name_class.appendChild(p_text)
+        language.appendChild(name_class)
+
+        tick_class = document.createElement("div");
+        tick_class.classList.add("tick");
+
+        tick = document.createElement("input");
+        tick.setAttribute("type", "checkbox")
+        tick.setAttribute("lang", langs[i])
+
+
+        tick_class.appendChild(tick)
+        language.appendChild(tick_class)
+
+        parent.appendChild(language)
+    }
+}
+```
+
+<a name="add_gpt"></a>
+
+## add\_gpt
+
+The `add_gpt` function populates a dropdown menu on the GUI. It iterates over a list of gpt\_versions, creates `option` elements, and appends them to the designated parent DOM node.
+
+```javascript
+function add_gpt(gpt_vesions){
+    parent = document.querySelector(".input .current .right select")
+    for (i in gpt_vesions){
+        op = document.createElement("option")
+        op.setAttribute("value", gpt_vesions[i])
+        op.innerHTML = gpt_vesions[i]
+
+        parent.appendChild(op)
+    }
+}
+```
+
+<a name="gen_doc"></a>
+
+## gen\_doc
+
+The `gen_doc` function collects user input from the GUI (project\_name, path, ignored\_files, gpt, languages, and prompts) and passes the collected information to the external extension to generate documentation.
+
+```javascript
+function gen_doc(){
+    name_project = document.getElementById("name").value
+    path = document.getElementById("path").value
+    ignore = document.getElementById("ignore").value
+    g_prompt = document.getElementById("g_prompt").value
+    d_prompt = document.getElementById("d_prompt").value
+
+    gpt = document.getElementById("gpt").value
+    languages = get_lang()
+
+    eel.gen_doc(name_project, path, ignore, languages, g_prompt, d_prompt, gpt)
+}
+```
+
+<a name="getlang"></a>
+
+## get\_lang
+
+The `get_lang` function retrieves the selected languages from the GUI. It iterates over input elements within a specific DOM node and returns the language values of the checked inputs.
+
+```javascript
+function get_lang(){
+    inputs = document.querySelectorAll(".input .current .left .language .tick input")
+    ex = []
+    for (i in inputs){
+        if (inputs[i].checked){
+            ex.push(inputs[i].lang)
+        }
+    }
+
+    return ex
+}
+```
+
+Feel free to use and customize this documentation for further clarity and application-specific instructions.
+# style.css Documentation
+
+This `style.css` file is responsible for the styling of the Quick-doc-py UI (User Interface) application, providing users with a modern and visually appealing experience.
+
+## Usage
+
+To use this CSS file in your project, simply import it into your HTML file using the following line in the `<head>` section of your HTML document:
+
+```html
+<link rel="stylesheet" href="./style.css">
+```
+
+Ensure that you place the `style.css` file at the appropriate location relative to your HTML file. In this example, it is assumed to be in the same directory.
+
+## Methods
+
+No methods are present in this CSS file.
+
+---
+
+Please note that this documentation is an addition to the full documentation of the `style.css` file, focusing primarily on usage and describing the methods. For further details on the styling techniques used, please refer to the full documentation or additional resources, as needed.
+# visual.py Documentation
+
+This document describes the usage and functionality of the `visual.py` file in Markdown format using the Google style guide. The file is part of the Quick-doc-py UI project.
+
+## Usage
+
+The `visual.py` file is a Python module designed to interact with the graphical user interface (GUI) built using Eel. It exposes various methods to generate documentation based on user input.
+
+### Requirements
+
+Ensure that you have the following packages installed:
+
+* `eel` for embedding web-based GUIs in Python
+* `backend` for handling data and generating documentation
+
+To install the required packages, you can use the following command:
+
+```bash
+pip install eel
+```
+
+If the `backend` module is not in the same directory, you need to import it from the relative path as shown in the code below:
+
+```python
+from . import backend
+```
+
+### Functions and Mets
+
+##hod## `get_info()`
+
+The `get_info()` function retrieves the list of supported programming languages and versions available for document generation. This method is exposed to the GUI through Eel and can be called using the following JavaScript code:
+
+```javascript
+window.onloaded('get_info');
+```
+
+The returned `data` object includes the following fields:
+```python
+{
+    "languages": [list_of_supported_languages],
+    "versions": [list_of_supported_versions]
+}
+```
+
+#### `gen_doc()`
+
+The `gen_doc()` function generates documentation based on user input. It requires the following parameters:
+- `name`: The name of the project for which documentation is generated.
+- `root_dir`: The root directory where the project files are located.
+- `ignore`: A list of file patterns to ignore during the documentation generation.
+- `languages`: A list of programming languages to be included in the documentation.
+- `g_prompt`: The general prompt for the language model to use during documentation generation.
+- `d_prompt`: The default prompt for the language model to use during documentation generation.
+- `version`: The specific version of the language model to use.
+
+The function initializes an instance of `AutoDock` with the provided parameters and calls its `gen_doc()` method to generate the documentation.
+
+### Running the GUI
+
+To start the GUI, you need to call the `main()` function. This will initialize the Eel module, specifying the location of the HTML file (`index.html`) and the desired window size and mode.
+
+```python
+if __name__ == '__main__':
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    eel.init(os.path.join(current_dir, 'GUI'))
+    eel.start("index.html", port=809, size=(400, 300), mode="chrome")
+```
+
+## Conclusion
+
+The `visual.py` file provides a Python interface to interact with the Quick-doc-py UI's graphical user interface. It allows users to retrieve information about supported languages and versions as well as generate documentation based on provided project parameters.
+
+Feel free to use and modify this documentation as needed, while keeping the required formatting and style.
+# quick_doc_ui
+
+Welcome to the Quick-doc UI Module! This documentation page will guide you through the usage of the methods provided within the `__init__.py` file of the Quick-doc UI Python project.
+
+## Table of Contents
+- [Initialization](#initialization)
+- [close_quick_doc](#close_quick_doc)
+- [update_command](#update_command)
+
+## Initialization
+To use the Quick-doc UI module, you'll need to initialize an instance of the `QuickDocUI` class. This will set up the necessary environment for the other methods to function properly.
+
+```python
+from quick_doc_ui import QuickDocUI
+
+quick_doc = QuickDocUI()
+```
+
+## close_quick_doc
+This method is used to close the Quick-doc UI interface.
+
+```python
+quick_doc.close_quick_doc()
+```
+
+## update_command
+This method allows you to replace the current Quick-doc UI command.
+
+```python
+quick_doc.update_command(new_command)
+```
+
+- `new_command`: (string) The new command to be added to the Quick-doc UI.
+- **Returns**: None
+
+By utilizing the methods provided by this module, you'll be able to effectively control the Quick-doc UI project within your Python environment.
