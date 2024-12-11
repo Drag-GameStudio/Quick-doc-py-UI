@@ -33,6 +33,9 @@ def gen_doc(name: str, root_dir: str,
 
 
 def main():
+    os.system("pip install --upgrade quick-doc-py")
+
     current_dir = os.path.dirname(os.path.abspath(__file__))
     eel.init(os.path.join(current_dir, 'GUI'))
     eel.start("index.html", port=809, size=(400, 300), mode="chrome")
+

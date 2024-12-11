@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quick-doc-ui"
-version = "1.0.0"
+version = "1.0.2"
 description = "UI docomentation generator"
 authors = ["Dmytro <sinica911@gmail.com>"]
 license = "MIT"
