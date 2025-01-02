@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quick-doc-ui"
-version = "1.0.2"
+version = "1.0.3"
 description = "UI docomentation generator"
 authors = ["Dmytro <sinica911@gmail.com>"]
 license = "MIT"
@@ -10,8 +10,9 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 eel = "^0.18.1"
+quick-doc-py = "^1.0.0"
 
 [tool.poetry.scripts]
 gen-doc-ui = "quick_doc_ui.visual:main"

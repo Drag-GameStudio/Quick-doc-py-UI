@@ -5,7 +5,7 @@
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-@set "VIRTUAL_ENV=C:\Users\sinic\Python_Project\Impotant projects\Libs\Quick-doc-py UI\.venv"
+@set "VIRTUAL_ENV=C:\Users\huina\Python Projects\Impotant projects\Libs\Quick-doc-py UI\.venv"
 
 @set "VIRTUAL_ENV_PROMPT=quick-doc-ui-py3.12"
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (
