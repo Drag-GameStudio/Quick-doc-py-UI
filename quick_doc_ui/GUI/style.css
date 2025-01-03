@@ -1,135 +1,146 @@
-body{
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background: black;
+    font-family: 'Arial', sans-serif;
 }
 
-.header{
-    width: 100%;
-    background-color: white;
-    height: 70px;
-    position: relative;
-
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-.header h1{
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: monospace;
-    font-style: normal;
-    font-size: 35px;
-    display: inline-block;
-}
-
-.header img{
-    position: absolute;
-    top: 50%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-}
-
-.input{
-    width: 100%;
-}
-
-
-
-.input .default_input input {
-    width: 350px;
-    height: 50px;
-    border: 0;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
+.header {
     text-align: center;
-    margin-top: 20px; 
-    margin-left: 50%;
-    transform: translate(-50%);
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
-.input .default_input input::placeholder{
-    opacity: 0.5;
+.header h1 {
+    font-size: 2.5rem;
+    color: #000;
+    margin-bottom: 10px;
 }
 
-.input .default_input input:focus{
-    outline: 0;
+.header img {
+    width: 100px;
+    height: auto;
+    animation: bounce 2s infinite;
 }
 
-.input .current{
+.input {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.default_input input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.default_input input:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.language {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-top: 30px;
+    align-items: center; /* Align items in the center */
 }
 
-.input .current .left{
-    display: grid;
+.language .name {
+    font-weight: bold;
+    margin-right: 10px; /* Space between name and tick */
 }
 
-.input .current .right{
-    display: grid;
-    grid-template-rows: 40px
-}
-
-.input .current .left .language{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 10px;
-}
-
-.input .current .left .language .name{
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    font-size: 30px;
-    text-align: right;
-    
-}
-
-.input .current .left .language .name p{
-    margin: 0;
-}
-
-
-
-.input .current .left .language .tick input{
+.language .tick {
     width: 20px;
     height: 20px;
-    margin-left: 20px;
-    margin-top: 9px;
-    border-radius: 10px;
-}
-.input .current .right p{
-    color: white;
-    margin-top: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
-    margin: 0;
-
-}
-.input .current .right select{
-    width: 175px;
-    height: 35px;
-    border-radius: 10px;
-    border: 0;
 }
 
-.send{
-    margin-top: 50px;
+.right {
+    text-align: right;
 }
 
-.send button{
-    width: 350px;
-    height: 50px;
-    border: 0;
-    border-radius: 10px;
-    margin-left: 50%;
-    transform: translate(-50%);
-    background-color: rgb(232, 255, 208);
-    font-size: 35px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(83, 83, 83);
+.send {
+    margin-top: 20px;
 }
+
+.send button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 300px;
+}
+
+.send button:hover {
+    background-color: #444;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+

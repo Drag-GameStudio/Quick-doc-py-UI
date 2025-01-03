@@ -39,3 +39,7 @@ def main():
     eel.init(os.path.join(current_dir, 'GUI'))
     eel.start("index.html", port=809, size=(400, 300), mode="chrome")
 
+
+if __name__ =="__main__":
+    main()
+
